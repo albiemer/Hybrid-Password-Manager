@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+
+/* ---------- login -------- */
+
+/* Full-width input fields */
+
+.notetxtarea{
+	
+	width: 50%;
+    padding: 12px 20px;
+    margin: 2px 0;
+    display: inline-block;
+    border: 2px solid #547c72;
+    box-sizing: border-box;
+    background-color:#d9f1fc;
+    height: 100%;
+	
+	}
+
+input[type=text], input[type=password] {
+    width: 50%;
+    padding: 12px 20px;
+    margin: 2px 0;
+    display: inline-block;
+    border: 2px solid #547c72;
+    box-sizing: border-box;
+    background-color:#d9f1fc;
+    height: 50%;
+  
+}
+
+
+.login-container {
+    padding: 16px;
+    color: white;
+}
+
+
+
+/* The Modal (background) */
+.login-modal {
+    
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    /*overflow: auto; Enable scroll if needed */
+    /*background-color: rgb(0,0,0); /* Fallback color */
+    /*background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+    /* padding-top: 60px; */
+    
+    
+}
+
+/* Modal Content/Box */
+.login-modal-content {
+    background-color: black; /*#2c7493;*/
+    border: 5px solid #8aaaa2;
+    width: 100%; /* Could be more or less, depending on screen size */
+	height:100%;
+	background-image: url('static/reaper.jpg');
+}
+
+
+
+@keyframes animatezoom {
+    from {transform: scale(0)} 
+    to {transform: scale(1)}
+}
+
+.note{
+
+color: #f7c8cb;
+
+}
+
+/* Change styles for span and cancel button on extra small screens */
+
+/* toggle switch */
+
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 60px;
+  height: 30px;
+}
+
+/* Hide default HTML checkbox */
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+/* The slider */
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 23px;
+  width: 23px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+input:checked + .slider {
+  background-color: #2196F3;
+}
+
+input:focus + .slider {
+  box-shadow: 0 0 1px #2196F3;
+}
+
+input:checked + .slider:before {
+  -webkit-transform: translateX(26px);
+  -ms-transform: translateX(26px);
+  transform: translateX(26px);
+}
+
+/* Rounded sliders */
+.slider.round {
+  border-radius: 34px;
+}
+
+.slider.round:before {
+  border-radius: 50%;
+}
+
+/* toggle sitch */
+
+
+</style>
+</head>
+<body>
+
+<div id="id01" class="login-modal">
+  
+  <form class="login-modal-content animate" action="http://{{myipaddress}}/loginconfirm" method = "post">
+
+    <div class="login-container">
+	  
+	  
+      <input type="text" name="u_ser" hidden readonly value = "{{ singlepass[0] }}"/>
+	  
+      <br><label for="uname"><b>TITLE</b></label>
+      <br><input class = "login-input-username" type="text" name="u_ser" value = "{{ singlepass[1] }}"/>
+
+	  <br><label for="uname"><b>USERNAME</b></label>
+      <br><input class = "login-input-username" type="text" name="u_ser" value = "{{ singlepass[2] }}">
+
+      <br><label for="psw"><b>PASSWORD</b></label>
+      <br><input class = "login-input-password" id = "mypass" type="password" name="p_ass" value = "{{ singlepass[3] }}">
+      <label class="switch">
+		<input onclick="mypassshowFunction()" type="checkbox">
+		<span class="slider round"></span>
+	  </label>
+      <br><label for="psw"><b>AUTHENTICATOR</b></label>
+      <br><input class = "login-input-password" id = "myauth" type="password" name="p_ass" value = "{{ singlepass[4] }}">
+      <label class="switch">
+		<input onclick="myauthshowFunction()" type="checkbox">
+		<span class="slider round"></span>
+	  </label>
+      <br><label for="uname"><b>QUALITY</b></label>
+      <br><input class = "login-input-username" type="text" name="u_ser" >
+      
+      <br><label for="uname"><b>URL</b></label>
+      <br><input class = "login-input-username" type="text" name="u_ser" value = "{{ singlepass[5] }}">
+      
+      <br><br><label for="uname"><b>NOTES</b></label>
+      <br><textarea class = "notetxtarea" name="u_ser" >{{ singlepass[6] }}</textarea>
+      
+      <br><br>
+      <button style = "margin-top: 5%; font-size: 20px">SAVE</button>
+      <button style = "margin-top: 5%; font-size: 20px">DELETE</button>
+      <button style = "margin-top: 5%; font-size: 20px" formaction="/backtomain">CANCEL</button>
+
+    </div>
+
+  </form>
+  
+</div>
+
+<!--button id="myBtnlogout" accesskey="o" onclick = "windowClose();" hidden>close</button-->
+
+<script>
+
+function myauthshowFunction() {
+  var x = document.getElementById("myauth");
+  if (x.type === "password") {
+    x.type = "text";
+  } else {
+    x.type = "password";
+  }
+}	
+	
+function mypassshowFunction() {
+  var x = document.getElementById("mypass");
+  if (x.type === "password") {
+    x.type = "text";
+  } else {
+    x.type = "password";
+  }
+}	
+	
+// Get the modal
+var modal = document.getElementById('id01');
+
+// When the user clicks anywhere outside of the modal, close it
+//window.onclick = function(event) {
+  //  if (event.target == modal) {
+    //    modal.style.display = "none";
+    //}
+//}
+
+//exit
+
+function windowClose() {
+
+window.close();
+
+}
+
+// altback disable
+
+window.location.hash="no-back-button";
+window.location.hash="Again-No-back-button";//again because google chrome don't insert first hash into history
+window.onhashchange=function(){window.location.hash="no-back-button";}
+
+
+</script>
+
+</body>
+</html>

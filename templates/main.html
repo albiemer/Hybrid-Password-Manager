@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+ul, #myUL {
+  list-style-type: none;
+}
+
+#myUL {
+  margin: 0;
+  padding: 0;
+}
+
+.caret {
+  cursor: pointer;
+  -webkit-user-select: none; /* Safari 3.1+ */
+  -moz-user-select: none; /* Firefox 2+ */
+  -ms-user-select: none; /* IE 10+ */
+  user-select: none;
+}
+
+.caret::before {
+  content: "\25B6";
+  color: black;
+  display: inline-block;
+  margin-right: 6px;
+}
+
+.caret-down::before {
+  -ms-transform: rotate(90deg); /* IE 9 */
+  -webkit-transform: rotate(90deg); /* Safari */'
+  transform: rotate(90deg);  
+}
+
+.nested {
+  display: none;
+}
+
+.active {
+  display: block;
+}
+	
+/* table design */
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+  width: 100%;
+  border: 1px solid #ddd;
+  margin-top: 5%;
+}
+
+td {
+  text-align: left;
+  padding: 1px;
+}
+
+th{
+	text-align: left;
+	padding: 5px;	
+}
+
+tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+/* start scroll indicator */
+
+.header {
+  background-image: url('static/headermage.jpg');
+  position: fixed;
+  top: 0;
+  z-index: 1;
+  width: 100%;
+  background-color: #f1f1f1;
+  /* border-bottom: 5px solid red; */
+  color: white;
+}
+
+.header h2 {
+  text-align: center;
+}
+
+.progress-container {
+  width: 100%;
+  height: 8px;
+  background: #ccc;
+}
+
+.progress-bar {
+  height: 8px;
+  background: #04AA6D;
+  width: 0%;
+}
+
+.content {
+  padding: 100px 0;
+  margin: 20px auto 0 auto;
+  width: 100%;
+}
+
+/* end scroll indicator */
+
+/* search box */
+
+#mysearchInput{
+	
+padding: 6px 10px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 2px solid #547c72;
+    box-sizing: border-box;
+    background-color:#d9f1fc;
+    height: 50%;
+
+}
+
+/* end search box */
+
+</style>
+</head>
+<body>
+
+<!--div class = "divleft">
+	<ul id="myUL">
+	  <li><span class="caret"><button>Social Media</button></span>
+		<ul class="nested">
+		  <li><button>Facebook</button></li>
+		  <li><button>Twitter</button></li>  
+		</ul>
+	  </li>
+	</ul>
+</div-->
+
+
+<div class="header">
+  
+  <h2 style = "margin-left: 4%">HYBRID PASSWORD MANAGER</h2>
+  <form method = "post">
+	<button style = "margin: 2%; font-size: 20px;" formaction="/exitlogin">NEW PASSWORD</button>
+	<button style = "margin: 2%; font-size: 20px; float: right;" formaction="/exitlogin">Exit</button>
+    <input type="text" id="mysearchInput" onkeyup="mysearchFunction()" placeholder="Search for names.." title="Type in a name" autofocus>
+  </form>
+  <h3 style = "float: left; margin-left: 8%;">TITLE</h3>
+  <h3 style = "float: left; margin-left: 13%;">USERNAME</h3>
+  <h3 style = "float: left; margin-left: 10%;">PASSWORD</h3>
+  <h3 style = "float: left; margin-left: 13%;">URL</h3>
+  <div class="progress-container">
+    <div class="progress-bar" id="myBar"></div>
+	</div>  
+</div>
+
+<div class="content">
+	  <br><br><br><table id = "myTable">
+		{% for items in allpass %}
+		<form class="login-modal-content animate" action="/viewpword" method = "post">
+		<tr>
+		  <td><input name = "id_pass" type = "text" value = "{{ items[0] }}" hidden readonly/></td>
+		  <td hidden>{{ items[1] }}</td>
+		  <td><input type = "text" value = "{{ items[1] }}" readonly/></td>
+		  <td><input type = "text" value = "{{ items[2] }}" readonly/></td>
+		  <td><input type = "password" value = "{{ items[3] }}" readonly/></td>
+		  <td><input type = "text" value = "{{ items[5] }}" readonly/></td>
+		  <td><button>View</button></td>
+		</tr>
+		</form>
+		{% endfor %}
+		</table>
+</div>
+
+
+<script>
+
+function mysearchFunction() {
+  var input, filter, table, tr, td, i, txtValue;
+  input = document.getElementById("mysearchInput");
+  filter = input.value.toUpperCase();
+  table = document.getElementById("myTable");
+  tr = table.getElementsByTagName("tr");
+  for (i = 0; i < tr.length; i++) {
+    td = tr[i].getElementsByTagName("td")[1];
+    if (td) {
+      txtValue = td.textContent || td.innerText;
+      if (txtValue.toUpperCase().indexOf(filter) > -1) {
+        tr[i].style.display = "";
+      } else {
+        tr[i].style.display = "none";
+      }
+    }       
+  }
+}
+	
+var toggler = document.getElementsByClassName("caret");
+var i;
+
+for (i = 0; i < toggler.length; i++) {
+  toggler[i].addEventListener("click", function() {
+    this.parentElement.querySelector(".nested").classList.toggle("active");
+    this.classList.toggle("caret-down");
+  });
+}
+
+// scroll indicator
+
+// When the user scrolls the page, execute myFunction 
+window.onscroll = function() {scrollindiFunction()};
+
+function scrollindiFunction() {
+  var winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+  var height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+  var scrolled = (winScroll / height) * 100;
+  document.getElementById("myBar").style.width = scrolled + "%";
+}
+
+</script>
+
+</body>
+</html>
