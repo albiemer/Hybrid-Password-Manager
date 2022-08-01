@@ -4,7 +4,7 @@ This program can only be use in Linux operating, this application can be use in 
 before to run the program be sure to install first the steghide with "sudo apt install steghide" from your terminal.
 please see the requirements for addtionall install library for this program to  make it fully functional.
 
-This is a Password manager that created from Python3 flask with implement terminal application like steghide to hide the password manager database. this is created with python3, html, css, java
+This is a Password manager that created primary with Python3 flask implemented with terminal application like steghide to hide the password manager database. this is created with python3, html, css, javascript or you can considered it as hybrid application.
 
 The Login program
 
