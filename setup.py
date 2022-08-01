@@ -18,6 +18,7 @@ from ipconfig import ip, port, fullip
 from note import loginfail, logintitle
 from sqlquery import *
 import module
+from myapi import *
 
 #2
 pwordapp = Flask(__name__)
@@ -51,7 +52,7 @@ def loginconfirmfunc():
         myuser = request.form['u_ser']
         mypass = request.form['p_ass']
         userlog = loginquery(myuser, mypass) #mydb.db
-        sqlqueryextractdb(mypass)
+        stegextractdb(mypass)
         if(userlog):
             if userlog[3] == myuser and userlog[5] == mypass:
                 session['mypass'] = mypass
@@ -67,7 +68,7 @@ def loginconfirmfunc():
 @pwordapp.route('/exitlogin', methods = ['POST'])
 def exitloginfunc():
     if 'mypass' in session:
-        sqlqueryembeddb(session['mypass'])
+        stegembeddb(session['mypass'])
         session.pop('mypass', None)
         hidedb()
         window.destroy()
