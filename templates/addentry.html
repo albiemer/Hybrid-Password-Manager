@@ -159,44 +159,42 @@ input:checked + .slider:before {
 
     <div class="login-container">
 	  
-	  <label for="uname"><b>ID</b></label>
-      <br><input type="text" name="u_ser" hidden readonly value = "{{ singlepass[0] }}" readonly />
-	  
       <br><label for="uname"><b>TITLE</b></label>
-      <br><input class = "login-input-username" type="text" name="u_ser" value = "{{ singlepass[1] }}" readonly />
+      <br><input class = "login-input-username" type="text" name="t_itle" autofocus >
 
 	  <br><label for="uname"><b>USERNAME</b></label>
-      <br><input class = "login-input-username" type="text" name="u_ser" value = "{{ singlepass[2] }}" readonly >
+      <br><input class = "login-input-username" type="text" name="u_ser" >
 
       <br><label for="psw"><b>PASSWORD</b></label>
-      <br><input class = "login-input-password" id = "mypass" type="password" name="p_ass" value = "{{ singlepass[3] }}" readonly >
+      <br><input class = "login-input-password" onkeyup = "check();" id = "mypass" placeholder = "PASSWORD" type="password" name="p_ass" >
       <label class="switch">
 		<input onclick="mypassshowFunction()" type="checkbox">
 		<span class="slider round"></span>
 	  </label>
+	  <br><input class = "login-input-password" onkeyup = "check();" id = "re_mypass" placeholder = "REPEAT PASSWORD" type="password" name="p_ass" >
+      <span id='message'></span><br>
+      
       <br><label for="psw"><b>AUTHENTICATOR</b></label>
-      <br><input class = "login-input-password" id = "myauth" type="password" name="p_ass" value = "{{ singlepass[4] }}" readonly>
+      <br><input class = "login-input-password" id = "myauth" type="password" name="a_uth" >
       <label class="switch">
 		<input onclick="myauthshowFunction()" type="checkbox">
 		<span class="slider round"></span>
 	  </label>
       <br><label for="uname"><b>QUALITY</b></label>
-      <br><input class = "login-input-username" type="text" name="u_ser" readonly>
+      <br><input class = "login-input-username" type="text" name="q_uality" >
       
       <br><label for="uname"><b>URL</b></label>
-      <br><input class = "login-input-username" type="text" name="u_ser" value = "{{ singlepass[5] }}" readonly>
+      <br><input class = "login-input-username" type="text" name="u_rl" >
       
       <br><br><label for="uname"><b>NOTES</b></label>
-      <br><textarea class = "notetxtarea" name="u_ser" readonly >{{ singlepass[6] }}</textarea>
+      <br><textarea class = "notetxtarea" name="n_otes" ></textarea>
       
       <br>
-      <button style = "margin-top: 2%; font-size: 20px">SAVE</button>
+      <button style = "margin-top: 2%; font-size: 20px" id  = "usaveid" formaction="/addnewproc" disabled>SAVE</button>
       <button style = "margin-top: 2%; font-size: 20px">DELETE</button>
       <button style = "margin-top: 2%; font-size: 20px" formaction="/backtomain">CANCEL</button>
-
-    </div>
-
-  </form>
+     </div>
+   </form>
   
 </div>
 
@@ -204,16 +202,31 @@ input:checked + .slider:before {
 
 <script>
 
+var check = function() {
+  if (document.getElementById('mypass').value ==
+    document.getElementById('re_mypass').value) {
+    document.getElementById('message').style.color = 'green';
+    document.getElementById('message').innerHTML = 'matching';
+    document.getElementById("usaveid").disabled = false;
+  } else {
+    document.getElementById('message').style.color = 'red';
+    document.getElementById('message').innerHTML = 'not matching';
+    document.getElementById("usaveid").disabled = true;
+  }
+}
+
 function myauthshowFunction() {
   var x = document.getElementById("myauth");
   if (x.type === "password") {
     x.type = "text";
   } else {
     x.type = "password";
+    document.getElementById("myText").disabled = true;
   }
 }	
 	
 function mypassshowFunction() {
+  var x = document.getElementById("mypass");
   var x = document.getElementById("mypass");
   if (x.type === "password") {
     x.type = "text";
