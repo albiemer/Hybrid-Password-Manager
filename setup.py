@@ -41,7 +41,7 @@ def addnewquery():
         notes = request.form['n_otes']
         sqlqueryaddnewrecord(title, uname, pword, auth, url, notes)
         allpass = selectallpass()
-        return render_template('main.html', allpass = allpass)
+        return render_template('main.html', allpass = allpass, title = title)
     return None
 
 @pwordapp.route('/viewpword', methods = ['POST', 'GET'])
