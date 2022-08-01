@@ -45,23 +45,13 @@ def sqlqueryidsearch(idsearch):
     return result
 
 #print(sqlqueryidsearch(2))
-
-# remove passdmngrdb.db first to validate file existing before extracting database
-# to avoid error from the system
-def sqlqueryextractdb(mypass):
-    os.system("rm passdmngrdb.db")
-    os.system("steghide extract -sf me.jpg -p {}".format(mypass))
-
-# sqlqueryextractdb('albi3mer')
-
-# to use steghide as a teminal api for your program you need first to install steghide
-# from your terminal
-def sqlqueryembeddb(mypass):
-    os.system("steghide embed -ef passdmngrdb.db -cf me.jpg -p {}".format(mypass))
-    os.system("rm passdmngrdb.db")
-    
-#sqlqueryembeddb('albi3mer')
     
 def hidedb():
     os.system("rm passdmngrdb.db")
     
+def sqlqueryaddnewrecord(title, uname, pword, auth, url, notes):
+    conn = sqlite3.connect('passdmngrdb.db')
+    c = conn.cursor()
+    c.execute("insert into mypasstbl(Title, Username, Password, Authenticator, Url, Notes) values(?,?,?,?,?,?)", (title, uname, pword, auth, url, notes))
+    conn.commit()
+    conn.close()

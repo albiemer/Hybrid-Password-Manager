@@ -26,6 +26,23 @@ pwordapp = Flask(__name__)
 #3
 pwordapp.secret_key = 'any random string'
 
+@pwordapp.route('/addnew', methods = ['POST'])
+def addnewpword():
+    return render_template('addentry.html')
+
+@pwordapp.route('/addnewproc', methods = ['POST'])
+def addnewquery():
+    if request.method == 'POST':
+        title = request.form['t_itle']
+        uname = request.form['u_ser']
+        pword = request.form['p_ass']
+        auth = request.form['a_uth']
+        url = request.form['u_rl']
+        notes = request.form['n_otes']
+        sqlqueryaddnewrecord(title, uname, pword, auth, url, notes)
+        allpass = selectallpass()
+        return render_template('main.html', allpass = allpass)
+    return None
 
 @pwordapp.route('/viewpword', methods = ['POST', 'GET'])
 def viewpword():
