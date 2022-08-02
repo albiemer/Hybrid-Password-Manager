@@ -4,7 +4,6 @@ import os
 # from your terminal
 def stegembeddb(mypass):
     os.system("steghide embed -ef passdmngrdb.db -cf me.jpg -p {}".format(mypass))
-    os.system("rm passdmngrdb.db")
     
 #sqlqueryembeddb('albi3mer')
     

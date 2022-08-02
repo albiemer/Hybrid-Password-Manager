@@ -13,13 +13,12 @@
 
 import webview
 import threading
-from flask import Flask, request, render_template, session, url_for, redirect
+from flask import Flask, request, render_template, session, url_for, redirect, flash
 from ipconfig import ip, port, fullip
 from note import loginfail, logintitle
 from sqlquery import *
 import module
 from myapi import *
-import time
 
 #2
 pwordapp = Flask(__name__)
@@ -38,14 +37,11 @@ def updatepassfunc():
         url = request.form['u_rl']
         notes = request.form['n_otes']
         sqlqueryupdatepass(myid, title, uname, pword, auth, url, notes)
-        window1 = webview.create_window("adeguin", 'templates/splash.html', frameless = True)
-        window.hide()
-        time.sleep(3)
-        window1.destroy()
         if 'mypass' in session:
             mypass = session['mypass']
             stegembeddb(mypass)
-        return redirect(url_for('backtomainnonpostfunc'))
+            stegextractdb(mypass)
+            return redirect(url_for('backtomainnonpostfunc'))
     return None
 
 @pwordapp.route('/deletepass', methods = ['POST'])
@@ -53,8 +49,11 @@ def deletepassfunc():
     if request.method == 'POST':
         idselected = request.form['i_d']
         sqlquerydeletepass(idselected)
-        allpass = selectallpass()
-        return render_template('main.html', allpass = allpass)
+        if 'mypass' in session:
+            mypass = session['mypass']
+            stegembeddb(mypass)
+            stegextractdb(mypass)
+        return redirect(url_for('backtomainnonpostfunc'))
     return None
 
 @pwordapp.route('/addnew', methods = ['POST'])
@@ -71,8 +70,13 @@ def addnewquery():
         url = request.form['u_rl']
         notes = request.form['n_otes']
         sqlqueryaddnewrecord(title, uname, pword, auth, url, notes)
-        allpass = selectallpass()
-        return render_template('main.html', allpass = allpass, title = title)
+        if 'mypass' in session:
+            mypass = session['mypass']
+            stegembeddb(mypass)
+            stegextractdb(mypass)
+            allpass = selectallpass()
+            flash('RECORD ADDED SUCCESSFULLY')
+            return render_template('main.html', allpass = allpass)
     return None
 
 @pwordapp.route('/viewpword', methods = ['POST', 'GET'])
@@ -90,13 +94,9 @@ def backtomainfunc():
 
 @pwordapp.route('/backtomainnonpost')
 def backtomainnonpostfunc():
-    if 'mypass' in session:
-        mypass = session['mypass']
-        stegextractdb(mypass)
-        allpass = selectallpass()
-        window.show()
-        return render_template('main.html', allpass = allpass)
-        
+    allpass = selectallpass()
+    return render_template('main.html', allpass = allpass)
+         
 
 #4
 @pwordapp.route('/mypwdmngr')
@@ -114,9 +114,7 @@ def loginconfirmfunc():
         if(userlog):
             if userlog[3] == myuser and userlog[5] == mypass:
                 session['mypass'] = mypass
-                allpass = selectallpass()   #passdmngrdb.db
-                return render_template('main.html', allpass = allpass)
-        
+                return redirect(url_for('backtomainnonpostfunc'))
         else:
             return render_template(module.mymodule.login, myipaddress = fullip(), \
                                    note = logintitle, note1 = loginfail())
@@ -133,10 +131,10 @@ def exitloginfunc():
     else:
         hidedb()
         window.destroy()
+    return None
 #7
 def server():
     pwordapp.run(ip, port)
-    return None
     
 def runserver():
     t = threading.Thread(target=server)
@@ -146,7 +144,7 @@ def runserver():
 if __name__ == '__main__':
     runserver()
     # This line is to launch program in hybrid platform
-    window = webview.create_window("adeguin", 'http://'+fullip()+'/mypwdmngr', width=895, height=690, fullscreen=False, frameless=False)
-    webview.start(window)
+    window = webview.create_window("Password Manager", 'http://'+fullip()+'/mypwdmngr', width=895, height=690, fullscreen=False, frameless=False)
+    webview.start(window) 
     print(fullip(), ip)
     
