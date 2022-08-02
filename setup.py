@@ -13,18 +13,49 @@
 
 import webview
 import threading
-from flask import Flask, request, render_template, session
+from flask import Flask, request, render_template, session, url_for, redirect
 from ipconfig import ip, port, fullip
 from note import loginfail, logintitle
 from sqlquery import *
 import module
 from myapi import *
+import time
 
 #2
 pwordapp = Flask(__name__)
 
 #3
 pwordapp.secret_key = 'any random string'
+
+@pwordapp.route('/updateproc', methods = ['POST'])
+def updatepassfunc():
+    if request.method == 'POST':
+        myid = request.form['i_d']
+        title = request.form['t_itle']
+        uname = request.form['u_ser']
+        pword = request.form['p_ass']
+        auth = request.form['a_uth']
+        url = request.form['u_rl']
+        notes = request.form['n_otes']
+        sqlqueryupdatepass(myid, title, uname, pword, auth, url, notes)
+        window1 = webview.create_window("adeguin", 'templates/splash.html', frameless = True)
+        window.hide()
+        time.sleep(3)
+        window1.destroy()
+        if 'mypass' in session:
+            mypass = session['mypass']
+            stegembeddb(mypass)
+        return redirect(url_for('backtomainnonpostfunc'))
+    return None
+
+@pwordapp.route('/deletepass', methods = ['POST'])
+def deletepassfunc():
+    if request.method == 'POST':
+        idselected = request.form['i_d']
+        sqlquerydeletepass(idselected)
+        allpass = selectallpass()
+        return render_template('main.html', allpass = allpass)
+    return None
 
 @pwordapp.route('/addnew', methods = ['POST'])
 def addnewpword():
@@ -56,6 +87,16 @@ def viewpword():
 def backtomainfunc():
     allpass = selectallpass()
     return render_template('main.html', allpass = allpass)
+
+@pwordapp.route('/backtomainnonpost')
+def backtomainnonpostfunc():
+    if 'mypass' in session:
+        mypass = session['mypass']
+        stegextractdb(mypass)
+        allpass = selectallpass()
+        window.show()
+        return render_template('main.html', allpass = allpass)
+        
 
 #4
 @pwordapp.route('/mypwdmngr')

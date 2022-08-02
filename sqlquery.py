@@ -55,3 +55,19 @@ def sqlqueryaddnewrecord(title, uname, pword, auth, url, notes):
     c.execute("insert into mypasstbl(Title, Username, Password, Authenticator, Url, Notes) values(?,?,?,?,?,?)", (title, uname, pword, auth, url, notes))
     conn.commit()
     conn.close()
+    
+def sqlquerydeletepass(idselected):
+    conn = sqlite3.connect('passdmngrdb.db')
+    c = conn.cursor()
+    c.execute("delete from mypasstbl where ID = ?", (idselected,))
+    conn.commit()
+    conn.close()
+    
+def sqlqueryupdatepass(myid, title, uname, pword, auth, url, notes):
+    conn = sqlite3.connect('passdmngrdb.db')
+    c = conn.cursor()
+    c.execute("update mypasstbl set Title = ?, Username = ?, Password = ?, Authenticator = ?, Url = ?, Notes = ? where Id = ?", \
+              (title, uname, pword, auth, url, notes, myid))
+    conn.commit()
+    conn.close()
+    
