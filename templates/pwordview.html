@@ -165,7 +165,6 @@ input:checked + .slider:before {
 	  
       <br><label for="uname"><b>TITLE</b></label>
       <br><input class = "login-input-username" type="text" name="t_itle" value = "{{ singlepass[1] }}" />
-
 	  <br><label for="uname"><b>USERNAME</b></label>
       <br><input class = "login-input-username" type="text" name="u_ser" value = "{{ singlepass[2] }}" >
 
@@ -192,10 +191,8 @@ input:checked + .slider:before {
       
       <br>
       <button style = "margin-top: 2%; font-size: 20px" formaction="/updateproc" >SAVE</button>
-      <button style = "margin-top: 2%; font-size: 20px" >EDIT</button>
-      <button style = "margin-top: 2%; font-size: 20px" name = "d_elete" formaction="/deletepass">DELETE</button>
       <button style = "margin-top: 2%; font-size: 20px" formaction="/backtomain">CANCEL</button>
-
+	  <button style = "margin-top: 2%; font-size: 20px; float: right;" name = "d_elete" formaction="/deletepass" >DELETE</button>
     </div>
 
   </form>
@@ -205,7 +202,6 @@ input:checked + .slider:before {
 <!--button id="myBtnlogout" accesskey="o" onclick = "windowClose();" hidden>close</button-->
 
 <script>
-
 
 function myauthshowFunction() {
   var x = document.getElementById("myauth");

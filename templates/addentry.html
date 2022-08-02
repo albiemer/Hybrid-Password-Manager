@@ -160,10 +160,10 @@ input:checked + .slider:before {
     <div class="login-container">
 	  
       <br><label for="uname"><b>TITLE</b></label>
-      <br><input class = "login-input-username" type="text" name="t_itle" autofocus >
+      <br><input class = "login-input-username" placeholder = "Title..." type="text" name="t_itle" autofocus >
 
 	  <br><label for="uname"><b>USERNAME</b></label>
-      <br><input class = "login-input-username" type="text" name="u_ser" >
+      <br><input class = "login-input-username" placeholder = "Username..." type="text" name="u_ser" >
 
       <br><label for="psw"><b>PASSWORD</b></label>
       <br><input class = "login-input-password" onkeyup = "check();" id = "mypass" placeholder = "PASSWORD" type="password" name="p_ass" >
@@ -175,23 +175,22 @@ input:checked + .slider:before {
       <span id='message'></span><br>
       
       <br><label for="psw"><b>AUTHENTICATOR</b></label>
-      <br><input class = "login-input-password" id = "myauth" type="password" name="a_uth" >
+      <br><input class = "login-input-password" id = "myauth" placeholder = "Authenticator..." type="password" name="a_uth" >
       <label class="switch">
 		<input onclick="myauthshowFunction()" type="checkbox">
 		<span class="slider round"></span>
 	  </label>
       <br><label for="uname"><b>QUALITY</b></label>
-      <br><input class = "login-input-username" type="text" name="q_uality" >
+      <br><input class = "login-input-username" placeholder = "Quality..." type="text" name="q_uality" >
       
       <br><label for="uname"><b>URL</b></label>
-      <br><input class = "login-input-username" type="text" name="u_rl" >
+      <br><input class = "login-input-username" placeholder = "Url..." type="text" name="u_rl" >
       
       <br><br><label for="uname"><b>NOTES</b></label>
-      <br><textarea class = "notetxtarea" name="n_otes" ></textarea>
+      <br><textarea class = "notetxtarea" placeholder = "Notes..." name="n_otes" ></textarea>
       
       <br>
       <button style = "margin-top: 2%; font-size: 20px" id  = "usaveid" formaction="/addnewproc" disabled>SAVE</button>
-      <button style = "margin-top: 2%; font-size: 20px">DELETE</button>
       <button style = "margin-top: 2%; font-size: 20px" formaction="/backtomain">CANCEL</button>
      </div>
    </form>
