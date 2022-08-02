@@ -84,6 +84,7 @@ color: #f7c8cb;
 
 /* toggle switch */
 
+	
 .switch {
   position: relative;
   display: inline-block;
@@ -160,38 +161,39 @@ input:checked + .slider:before {
     <div class="login-container">
 	  
 	  <label for="uname"><b>ID</b></label>
-      <br><input type="text" name="u_ser" hidden readonly value = "{{ singlepass[0] }}" readonly />
+      <br><input type="text" name="i_d" hidden readonly value = "{{ singlepass[0] }}" readonly />
 	  
       <br><label for="uname"><b>TITLE</b></label>
-      <br><input class = "login-input-username" type="text" name="u_ser" value = "{{ singlepass[1] }}" readonly />
+      <br><input class = "login-input-username" type="text" name="t_itle" value = "{{ singlepass[1] }}" />
 
 	  <br><label for="uname"><b>USERNAME</b></label>
-      <br><input class = "login-input-username" type="text" name="u_ser" value = "{{ singlepass[2] }}" readonly >
+      <br><input class = "login-input-username" type="text" name="u_ser" value = "{{ singlepass[2] }}" >
 
       <br><label for="psw"><b>PASSWORD</b></label>
-      <br><input class = "login-input-password" id = "mypass" type="password" name="p_ass" value = "{{ singlepass[3] }}" readonly >
+      <br><input class = "login-input-password" id = "mypass" type="password" name="p_ass" value = "{{ singlepass[3] }}" >
       <label class="switch">
 		<input onclick="mypassshowFunction()" type="checkbox">
 		<span class="slider round"></span>
 	  </label>
       <br><label for="psw"><b>AUTHENTICATOR</b></label>
-      <br><input class = "login-input-password" id = "myauth" type="password" name="p_ass" value = "{{ singlepass[4] }}" readonly>
+      <br><input class = "login-input-password" id = "myauth" type="password" name="a_uth" value = "{{ singlepass[4] }}" >
       <label class="switch">
 		<input onclick="myauthshowFunction()" type="checkbox">
 		<span class="slider round"></span>
 	  </label>
       <br><label for="uname"><b>QUALITY</b></label>
-      <br><input class = "login-input-username" type="text" name="u_ser" readonly>
+      <br><input class = "login-input-username" type="text" name="q_uality" readonly>
       
       <br><label for="uname"><b>URL</b></label>
-      <br><input class = "login-input-username" type="text" name="u_ser" value = "{{ singlepass[5] }}" readonly>
-      
+      <br><input class = "login-input-username" type="text" name="u_rl" value = "{{ singlepass[5] }}" >
+      <a href = "https://{{ singlepass[5] }}" target="_blank">Goto URL</a>
       <br><br><label for="uname"><b>NOTES</b></label>
-      <br><textarea class = "notetxtarea" name="u_ser" readonly >{{ singlepass[6] }}</textarea>
+      <br><textarea class = "notetxtarea" name="n_otes" >{{ singlepass[6] }}</textarea>
       
       <br>
-      <button style = "margin-top: 2%; font-size: 20px">SAVE</button>
-      <button style = "margin-top: 2%; font-size: 20px">DELETE</button>
+      <button style = "margin-top: 2%; font-size: 20px" formaction="/updateproc" >SAVE</button>
+      <button style = "margin-top: 2%; font-size: 20px" >EDIT</button>
+      <button style = "margin-top: 2%; font-size: 20px" name = "d_elete" formaction="/deletepass">DELETE</button>
       <button style = "margin-top: 2%; font-size: 20px" formaction="/backtomain">CANCEL</button>
 
     </div>
@@ -203,6 +205,7 @@ input:checked + .slider:before {
 <!--button id="myBtnlogout" accesskey="o" onclick = "windowClose();" hidden>close</button-->
 
 <script>
+
 
 function myauthshowFunction() {
   var x = document.getElementById("myauth");
