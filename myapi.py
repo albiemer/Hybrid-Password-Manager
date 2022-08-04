@@ -11,6 +11,13 @@ def stegembeddb(mypass):
 # to avoid error from the system
 def stegextractdb(mypass):
     os.system("rm passdmngrdb.db")
+    os.system("rm passdmngrdb.db.cpt")
     os.system("steghide extract -sf me.jpg -p {}".format(mypass))
+    
+def encryptactivate(mypass):
+    os.system("ccrypt -e passdmngrdb.db -K {}".format(mypass))
+    
+def decryptactivate(mypass):
+    os.system("ccrypt -d passdmngrdb.db -K {}".format(mypass))
 
 # sqlqueryextractdb('albi3mer')
