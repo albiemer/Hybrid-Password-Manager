@@ -20,4 +20,10 @@ def encryptactivate(mypass):
 def decryptactivate(mypass):
     os.system("ccrypt -d passdmngrdb.db -K {}".format(mypass))
 
+def stegembedmydb():
+    os.system("steghide embed -ef mydb.db -cf mydb.jpeg -p 12345")
+
+def stegextractmydb():
+    os.system("steghide extract -sf mydb.jpeg -p 12345")
+    
 # sqlqueryextractdb('albi3mer')

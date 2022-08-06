@@ -78,9 +78,10 @@ def addnewquery():
             stegembeddb(mypass)
             stegextractdb(mypass)
             allpass = selectallpass()
+            allpasscount = countpass()
             encryptactivate(mypass)
             flash('RECORD ADDED SUCCESSFULLY')
-            return render_template('main.html', allpass = allpass)
+            return render_template('main.html', allpass = allpass, allpasscount = allpasscount[0])
     return None
 
 @pwordapp.route('/viewpword', methods = ['POST', 'GET'])
@@ -101,15 +102,17 @@ def backtomainfunc():
         mypass = session['mypass']
         decryptactivate(mypass)
         allpass = selectallpass()
+        allpasscount = countpass()
         encryptactivate(mypass)
-    return render_template('main.html', allpass = allpass)
+    return render_template('main.html', allpass = allpass, allpasscount = allpasscount[0])
 
 @pwordapp.route('/backtomainnonpost')
 def backtomainnonpostfunc():
     allpass = selectallpass()
+    allpasscount = countpass()
     if 'mypass' in session:
         encryptactivate(session['mypass'])
-    return render_template('main.html', allpass = allpass)
+    return render_template('main.html', allpass = allpass, allpasscount = allpasscount[0])
          
 
 #4
@@ -125,6 +128,7 @@ def loginconfirmfunc():
         mypass = request.form['p_ass']
         userlog = loginquery(myuser, mypass) #mydb.db
         stegextractdb(mypass)
+        rmmydb()
         if(userlog):
             if userlog[3] == myuser and userlog[5] == mypass:
                 session['mypass'] = mypass
@@ -142,15 +146,13 @@ def exitloginfunc():
         stegembeddb(session['mypass'])
         encryptactivate(session['mypass'])
         session.pop('mypass', None)
-        hidedb()
         window.destroy()
     else:
-        hidedb()
         window.destroy()
     return None
 #7
 def server():
-    pwordapp.run(ip, port)
+    pwordapp.run(host= ip, port = port)
     
 def runserver():
     t = threading.Thread(target=server)
@@ -158,9 +160,12 @@ def runserver():
     t.start()
     
 if __name__ == '__main__':
+    stegextractmydb()
     runserver()
     # This line is to launch program in hybrid platform
-    window = webview.create_window("Hybrid Password Manager", 'http://'+fullip()+'/mypwdmngr', width=895, height=690, fullscreen=False, frameless=False)
+    window = webview.create_window("Hybrid Password Manager", 'http://'+fullip()+'/mypwdmngr', width=895, height=690, \
+                                   resizable=False, fullscreen=False, frameless=False, confirm_close=True)
     webview.start(window) 
-    print(fullip(), ip)
+    hidedb()
+    #print(fullip(), ip)
     

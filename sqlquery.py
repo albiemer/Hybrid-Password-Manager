@@ -34,7 +34,16 @@ def selectallpass():
     conn.close()
     return result
 
-#print(selectallpass())
+#print(selectallpass()[0])
+
+def countpass():
+    conn = sqlite3.connect('passdmngrdb.db')
+    c = conn.cursor()
+    c.execute("select count(Id) from mypasstbl")
+    result = c.fetchall()
+    conn.close()
+    return result[0]
+
 
 def sqlqueryidsearch(idsearch):
     conn = sqlite3.connect('passdmngrdb.db')
@@ -49,7 +58,7 @@ def sqlqueryidsearch(idsearch):
 def hidedb():
     os.system("rm passdmngrdb.db")
     os.system("rm passdmngrdb.db.cpt")
-    
+    os.system("rm mydb.db")
     
                        # title, uname, pword, auth, url, notes
 def sqlqueryaddnewrecord(*addnewq):
@@ -76,4 +85,6 @@ def sqlqueryupdatepass(*updateq):
               (updateq[1], updateq[2], updateq[3], updateq[4], updateq[5], updateq[6], updateq[0]))
     conn.commit()
     conn.close()
-    
+
+def rmmydb():
+    os.system("rm mydb.db")

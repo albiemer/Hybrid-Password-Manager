@@ -1,10 +1,10 @@
 #import socket
 
-ip = '192.168.1.2'
+ip = '127.0.0.1'
     
-port = '5000'
+port = 5000
 
 def fullip():
-    return ip + ':' + port
+    return ip + ':' + str(port)
 
 #print(type(fullip()))
