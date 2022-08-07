@@ -127,8 +127,9 @@ def loginconfirmfunc():
     if request.method == 'POST':
         myuser = request.form['u_ser']
         mypass = request.form['p_ass']
+        stegembedmydb()
         userlog = loginquery(myuser, mypass) #mydb.db
-        stegextractdb(mypass)
+        stegextractdb(mypass)  #mypassdmngrdb.db
         if(userlog):
             if userlog[3] == myuser and userlog[5] == mypass:
                 session['mypass'] = mypass
@@ -167,5 +168,3 @@ if __name__ == '__main__':
                                    resizable=False, fullscreen=False, frameless=False, confirm_close=True)
     webview.start(window) 
     hidedb()
-    #print(fullip(), ip)
-    
