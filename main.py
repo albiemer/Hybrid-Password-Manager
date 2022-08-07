@@ -108,6 +108,7 @@ def backtomainfunc():
 
 @pwordapp.route('/backtomainnonpost')
 def backtomainnonpostfunc():
+    rmmydb()
     allpass = selectallpass()
     allpasscount = countpass()
     if 'mypass' in session:
@@ -128,7 +129,6 @@ def loginconfirmfunc():
         mypass = request.form['p_ass']
         userlog = loginquery(myuser, mypass) #mydb.db
         stegextractdb(mypass)
-        rmmydb()
         if(userlog):
             if userlog[3] == myuser and userlog[5] == mypass:
                 session['mypass'] = mypass

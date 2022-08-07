@@ -56,9 +56,9 @@ def sqlqueryidsearch(idsearch):
 #print(sqlqueryidsearch(2))
     
 def hidedb():
-    os.system("rm passdmngrdb.db")
-    os.system("rm passdmngrdb.db.cpt")
-    os.system("rm mydb.db")
+    os.system("shred -zvu 5 passdmngrdb.db")
+    os.system("shred -zvu 5 passdmngrdb.db.cpt")
+    os.system("shred -zvu 5 mydb.db")
     
                        # title, uname, pword, auth, url, notes
 def sqlqueryaddnewrecord(*addnewq):
@@ -87,4 +87,4 @@ def sqlqueryupdatepass(*updateq):
     conn.close()
 
 def rmmydb():
-    os.system("rm mydb.db")
+    os.system("shred -zvu 5 mydb.db")
