@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+
+/* ---------- login -------- */
+
+/* Full-width input fields */
+input[type=text], input[type=password] {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 2px solid #547c72;
+    box-sizing: border-box;
+    background-color:#d9f1fc;
+    height: 50%;
+  
+}
+
+
+.login-container {
+    padding: 16px;
+    color: white;
+}
+
+
+
+/* The Modal (background) */
+.login-modal {
+    
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+    padding-top: 60px;
+    
+    
+}
+
+/* Modal Content/Box */
+.login-modal-content {
+    background-color: black;/*#2c7493;*/
+    margin: 15% auto 15% auto; /* 5% from the top, 15% from the bottom and centered */
+    border: 5px solid #8aaaa2;
+    width: 35%; /* Could be more or less, depending on screen size */
+ 
+    /*border-radius: 0% 10% 10% 10%;*/
+    
+}
+
+
+
+@keyframes animatezoom {
+    from {transform: scale(0)} 
+    to {transform: scale(1)}
+}
+
+.note{
+
+color: #f7c8cb;
+
+}
+
+/* Change styles for span and cancel button on extra small screens */
+
+
+</style>
+</head>
+<body>
+
+<div id="id01" class="login-modal">
+  
+  <form class="login-modal-content animate" action="/netconfirmlocalyes" method = "post">
+
+    <div class="login-container">
+	
+	<h4 class = "note">DO YOU WANT PASSWORD MANAGER ACCESSIBLE IN LOCAL NETWORK?</h4>
+      <button style = "margin-top: 5%; font-size: 20px" value = "yes" name = "y_es">Yes</button>
+      <button style = "margin-top: 5%; font-size: 20px" value = "no" formaction="/netconfirmlocalno" name = "n_o">No</button>
+
+    </div>
+
+  </form>
+</div>
+
+<button id="myBtnlogout" accesskey="o" onclick = "windowClose();" hidden>close</button>
+
+<img src="/static/bg.webp" alt="Mountain View" style = "height:670px; width: 880px; margin: auto; opacity: 0.2;">
+
+<script>
+// Get the modal
+var modal = document.getElementById('id01');
+
+// When the user clicks anywhere outside of the modal, close it
+//window.onclick = function(event) {
+  //  if (event.target == modal) {
+    //    modal.style.display = "none";
+    //}
+//}
+
+//exit
+
+function windowClose() {
+
+window.close();
+
+}
+
+// altback disable
+
+window.location.hash="no-back-button";
+window.location.hash="Again-No-back-button";//again because google chrome don't insert first hash into history
+window.onhashchange=function(){window.location.hash="no-back-button";}
+
+
+</script>
+
+</body>
+</html>
