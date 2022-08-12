@@ -10,8 +10,8 @@ def stegembeddb(mypass):
 # remove passdmngrdb.db first to validate file existing before extracting database
 # to avoid error from the system
 def stegextractdb(mypass):
-    os.system("rm passdmngrdb.db")
-    os.system("rm passdmngrdb.db.cpt")
+    os.system("shred -zvu 5 passdmngrdb.db")
+    os.system("shred -zvu 5 passdmngrdb.db.cpt")
     os.system("steghide extract -sf me.jpg -p {}".format(mypass))
     
 def encryptactivate(mypass):
@@ -27,7 +27,8 @@ def stegembedmydb():
 #stegembedmydb()
 
 def stegextractmydb():
-    os.system("steghide extract -sf mydb.jpeg -p 12345")
+    #os.system("shred -zvu 1 mydb.db")
+    os.system("yes | steghide extract -sf mydb.jpeg -p 12345")
     os.system("ccrypt -e mydb.db -K 12345")
 
 #stegextractmydb()

@@ -8,7 +8,7 @@ def loginquery(*loginq):
     c = conn.cursor()
     c.execute("select * from user where Username=(?) and Password=(?)", (loginq[0], loginq[1]))
     result = c.fetchone()
-    conn.close()
+    #conn.close()
     return result
 
 #a, b = loginquery('albiemer', 'albi3mer')
@@ -56,9 +56,11 @@ def sqlqueryidsearch(idsearch):
 #print(sqlqueryidsearch(2))
     
 def hidedb():
-    os.system("shred -zvu 5 passdmngrdb.db")
-    os.system("shred -zvu 5 passdmngrdb.db.cpt")
-    os.system("shred -zvu 5 mydb.db")
+    os.system("shred -zvu 2 passdmngrdb.db")
+    os.system("shred -zvu 2 passdmngrdb.db.cpt")
+    os.system("shred -zvu 2 mydb.db")
+    os.system("shred -zvu 2 mydb.db.cpt")
+    
     
                        # title, uname, pword, auth, url, notes
 def sqlqueryaddnewrecord(*addnewq):
@@ -87,4 +89,4 @@ def sqlqueryupdatepass(*updateq):
     conn.close()
 
 def rmmydb():
-    os.system("shred -zvu 5 mydb.db")
+    os.system("shred -zvu 2 mydb.db")
