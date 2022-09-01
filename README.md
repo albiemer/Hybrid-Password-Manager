@@ -17,3 +17,10 @@ The main program which is all password are listed.
 This is the password viewer and edit entry, this form are able to edit, delete, update record.
 
 ![screen-2022-08-01-12-23-18](https://user-images.githubusercontent.com/36027987/182162006-b05c536e-f3b0-49f9-b4dc-9e2bbcea1543.jpg)
+
+INSTRUCTION OF INSTALLATION AND USE:
+
+1ST STEP:
+Install sqlite3 from your terminal
+
+file:///home/schop/Pictures/screengrab/screen-2022-09-02-02-39-19.jpg
