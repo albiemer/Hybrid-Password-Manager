@@ -53,7 +53,7 @@ def tolaunchmainno():
         myconfirm = request.form['n_o']
         if myconfirm == 'no':
             window.destroy()
-            os.system("python3 offline.py {}".format())
+            os.system("python3 offline.py {} {}".format(checkarg()[0], checkarg()[1]))
             
 
 def server2():

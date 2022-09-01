@@ -26,8 +26,8 @@ def loginquery(*loginq):
     conn.close()
     return result"""
 
-def selectallpass():
-    conn = sqlite3.connect('passdmngrdb.db')
+def selectallpass(dirdb):
+    conn = sqlite3.connect(dirdb)
     c = conn.cursor()
     c.execute("select * from mypasstbl")
     result = c.fetchall()
@@ -36,8 +36,8 @@ def selectallpass():
 
 #print(selectallpass()[0])
 
-def countpass():
-    conn = sqlite3.connect('passdmngrdb.db')
+def countpass(dirdb):
+    conn = sqlite3.connect(dirdb)
     c = conn.cursor()
     c.execute("select count(Id) from mypasstbl")
     result = c.fetchall()
@@ -45,8 +45,8 @@ def countpass():
     return result[0]
 
 
-def sqlqueryidsearch(idsearch):
-    conn = sqlite3.connect('passdmngrdb.db')
+def sqlqueryidsearch(dirdb, idsearch):
+    conn = sqlite3.connect(dirdb)
     c = conn.cursor()
     c.execute("select * from mypasstbl where Id=(?)", (idsearch, ))
     result = c.fetchone()
@@ -56,23 +56,21 @@ def sqlqueryidsearch(idsearch):
 #print(sqlqueryidsearch(2))
     
 def hidedb():
-    os.system("shred -zvu 2 passdmngrdb.db")
-    os.system("shred -zvu 2 passdmngrdb.db.cpt")
-    os.system("shred -zvu 2 mydb.db")
-    os.system("shred -zvu 2 mydb.db.cpt")
+    os.system("shred -zvu 1 mydb.db")
+    os.system("shred -zvu 1 mydb.db.cpt")
     
     
                        # title, uname, pword, auth, url, notes
 def sqlqueryaddnewrecord(*addnewq):
-    conn = sqlite3.connect('passdmngrdb.db')
+    conn = sqlite3.connect(addnewq[6])
     c = conn.cursor()
     c.execute("insert into mypasstbl(Title, Username, Password, Authenticator, Url, Notes) values(?,?,?,?,?,?)", \
               (addnewq[0], addnewq[1], addnewq[2], addnewq[3], addnewq[4], addnewq[5]))
     conn.commit()
     conn.close()
     
-def sqlquerydeletepass(idselected):
-    conn = sqlite3.connect('passdmngrdb.db')
+def sqlquerydeletepass(dirdb, idselected):
+    conn = sqlite3.connect(dirdb)
     c = conn.cursor()
     c.execute("delete from mypasstbl where ID = ?", (idselected,))
     conn.commit()
@@ -81,7 +79,7 @@ def sqlquerydeletepass(idselected):
 
                       #myid, title, uname, pword, auth, url, notes
 def sqlqueryupdatepass(*updateq):
-    conn = sqlite3.connect('passdmngrdb.db')
+    conn = sqlite3.connect(updateq[7])
     c = conn.cursor()
     c.execute("update mypasstbl set Title = ?, Username = ?, Password = ?, Authenticator = ?, Url = ?, Notes = ? where Id = ?", \
               (updateq[1], updateq[2], updateq[3], updateq[4], updateq[5], updateq[6], updateq[0]))
@@ -89,4 +87,4 @@ def sqlqueryupdatepass(*updateq):
     conn.close()
 
 def rmmydb():
-    os.system("shred -zvu 2 mydb.db")
+    os.system("shred -zvu 1 mydb.db")

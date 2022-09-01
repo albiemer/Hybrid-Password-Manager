@@ -10,7 +10,7 @@
 7. The start_server() is the function to start server in multi thread program  
 """
 
-
+import sys
 import webview
 import threading
 from flask import Flask, request, render_template, session, url_for, redirect, flash
@@ -26,6 +26,16 @@ pwordapp = Flask(__name__)
 #3
 pwordapp.secret_key = 'any random string'
 
+def checkarg():
+    extarg1 = sys.argv[1]     # this is assigning a first argument, it is sign option like "-d"
+    extarg2 = sys.argv[2]     # this is entry actual directory for target database file
+    
+    if extarg1 == '-d' or extarg1 == '-directory':
+        return extarg2
+    
+    else:
+        print("wrong entry")
+
 @pwordapp.route('/updateproc', methods = ['POST'])
 def updatepassfunc():
     if request.method == 'POST':
@@ -38,10 +48,8 @@ def updatepassfunc():
         notes = request.form['n_otes']
         if 'mypass' in session:
             mypass = session['mypass']
-            decryptactivate(mypass)
-            sqlqueryupdatepass(myid, title, uname, pword, auth, url, notes)
-            stegembeddb(mypass)
-            stegextractdb(mypass)
+            decryptactivate(checkarg(), mypass)
+            sqlqueryupdatepass(myid, title, uname, pword, auth, url, notes, checkarg())
             return redirect(url_for('backtomainnonpostfunc'))
     return None
 
@@ -52,10 +60,8 @@ def deletepassfunc():
         idselected = request.form['i_d']
         if 'mypass' in session:
             mypass = session['mypass']
-            decryptactivate(mypass)
-            sqlquerydeletepass(idselected)
-            stegembeddb(mypass)
-            stegextractdb(mypass)
+            decryptactivate(checkarg(), mypass)
+            sqlquerydeletepass(checkarg(), idselected)
         return redirect(url_for('backtomainnonpostfunc'))
     return None
 
@@ -76,13 +82,11 @@ def addnewquery():
         notes = request.form['n_otes']
         if 'mypass' in session:
             mypass = session['mypass']
-            decryptactivate(mypass)
-            sqlqueryaddnewrecord(title, uname, pword, auth, url, notes)
-            stegembeddb(mypass)
-            stegextractdb(mypass)
-            allpass = selectallpass()
-            allpasscount = countpass()
-            encryptactivate(mypass)
+            decryptactivate(checkarg(), mypass)
+            sqlqueryaddnewrecord(title, uname, pword, auth, url, notes, checkarg())
+            allpass = selectallpass(checkarg())
+            allpasscount = countpass(checkarg())
+            encryptactivate(checkarg(), mypass)
             flash('RECORD ADDED SUCCESSFULLY')
             return render_template('main.html', allpass = allpass, allpasscount = allpasscount[0])
     return None
@@ -94,9 +98,9 @@ def viewpword():
         idsearch = request.form['id_pass']
         if 'mypass' in session:
             mypass = session['mypass']
-            decryptactivate(mypass)
-            singlepass = sqlqueryidsearch(idsearch)
-            encryptactivate(mypass)
+            decryptactivate(checkarg(), mypass)
+            singlepass = sqlqueryidsearch(checkarg(), idsearch)
+            encryptactivate(checkarg(), mypass)
         return render_template('pwordview.html', singlepass = singlepass)
     return None
 
@@ -105,10 +109,10 @@ def viewpword():
 def backtomainfunc():
     if 'mypass' in session:
         mypass = session['mypass']
-        decryptactivate(mypass)
-        allpass = selectallpass()
-        allpasscount = countpass()
-        encryptactivate(mypass)
+        decryptactivate(checkarg(), mypass)
+        allpass = selectallpass(checkarg())
+        allpasscount = countpass(checkarg())
+        encryptactivate(checkarg(), mypass)
     return render_template('main.html', allpass = allpass, allpasscount = allpasscount[0])
 
 
@@ -116,10 +120,10 @@ def backtomainfunc():
 def backtomainnonpostfunc():
     rmmydb()
     stegextractmydb()
-    allpass = selectallpass()
-    allpasscount = countpass()
+    allpass = selectallpass(checkarg())              #in sqlquery
+    allpasscount = countpass(checkarg())                          #in sqlquery
     if 'mypass' in session:
-        encryptactivate(session['mypass'])
+        encryptactivate(checkarg(), session['mypass']) #in myapi
     return render_template('main.html', allpass = allpass, allpasscount = allpasscount[0])
          
 
@@ -135,9 +139,9 @@ def loginconfirmfunc():
     if request.method == 'POST':
         myuser = request.form['u_ser']
         mypass = request.form['p_ass']
-        stegembedmydb()
+        stegembedmydb()                  # in myapi.py
+        decryptactivate(checkarg(), mypass)
         userlog = loginquery(myuser, mypass) #mydb.db
-        stegextractdb(mypass)  #mypassdmngrdb.db
         if(userlog):
             if userlog[3] == myuser and userlog[5] == mypass:
                 session['mypass'] = mypass
@@ -152,9 +156,9 @@ def loginconfirmfunc():
 @pwordapp.route('/exitlogin', methods = ['POST'])
 def exitloginfunc():
     if 'mypass' in session:
-        decryptactivate(session['mypass'])
-        stegembeddb(session['mypass'])
-        encryptactivate(session['mypass'])
+        #decryptactivate(session['mypass'])
+        #stegembeddb(session['mypass'])
+        encryptactivate(checkarg(), session['mypass'])
         session.pop('mypass', None)
         #window.destroy()
         return redirect(url_for('mypos'))
@@ -185,7 +189,7 @@ if __name__ == '__main__':
     runserver()
     # This line is to launch program in hybrid platform
     window = webview.create_window("Hybrid Password Manager", 'http://'+fullip()+'/mypwdmngr', width=895, height=690, \
-                                   resizable=False, fullscreen=False, frameless=False, confirm_close=True)
-    webview.start(window) 
+                                   resizable=False, fullscreen=False, frameless=False, confirm_close=False)
+    webview.start(window)
     hidedb()
     exit()
