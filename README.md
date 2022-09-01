@@ -34,14 +34,14 @@ Install requirements into your python3 environments
 ![screen-2022-09-02-03-01-21](https://user-images.githubusercontent.com/36027987/187992289-a23c2a6b-cda9-438f-ac1a-7cbff2b0e692.jpg)
 
 STEP 6:
-type "python3 main.py -d pstardb.db" it depends oon you if where the location of your database but atleast the directory is accurate for target in command.
+type "python3 main.py -d pstardb.db" it depends on you if where the location of your database but atleast the directory is accurate for target in command.
 
 ![screen-2022-09-02-03-09-30](https://user-images.githubusercontent.com/36027987/187993561-cdb5f17d-704b-40bb-93bb-563fc0a2c957.jpg)
 
 USAGE:
 
 STEP 7:
-you have the option if you want the password manager accessible on your local network or you want to access it alone from your computer.
+you have the option if you want the password manager accessible on your local network or you want to access it alone from your computer. if accessible this is the default url on the browser "192.168.1.2:5000/mypwdmngr" as long as you know your IP Address.
 
 ![screen-2022-09-02-03-11-55](https://user-images.githubusercontent.com/36027987/187993960-9bf8816e-d2b1-4564-a958-546b86bed9a1.jpg)
 
