@@ -1,3 +1,4 @@
+#!/usr/bin/env python3.9
 
 """
 
@@ -9,13 +10,26 @@
 6. The exitloginfunc() is a function to exit from the program.
 7. The start_server() is the function to start server in multi thread program  
 """
-
+import sys
 import os
 import webview
 import threading
 from flask import Flask, render_template, request
 #2
 pwordapp = Flask(__name__)
+
+def checkarg():
+    extarg1 = sys.argv[1]     # this is assigning a first argument, it is sign option like "-d"
+    extarg2 = sys.argv[2]     # this is entry for the actual directory for target database file
+    
+    
+    if extarg1 == '-d' or extarg1 == '-directory':
+        return extarg1, extarg2
+    
+    else:
+        print("wrong entry")
+        exit()
+        
 
 #3
 pwordapp.secret_key = 'any random string'
@@ -30,7 +44,7 @@ def tolaunchmainyes():
         myconfirm = request.form['y_es']
         if myconfirm == 'yes':
             window.destroy()
-            os.system("python3 connected.py")
+            os.system("python3 connected.py {} {}".format(checkarg()[0], checkarg()[1]))
 
 
 @pwordapp.route('/netconfirmlocalno', methods = ['POST'])
@@ -39,7 +53,7 @@ def tolaunchmainno():
         myconfirm = request.form['n_o']
         if myconfirm == 'no':
             window.destroy()
-            os.system("python3 offline.py")
+            os.system("python3 offline.py {}".format())
             
 
 def server2():
