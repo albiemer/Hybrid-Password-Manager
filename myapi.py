@@ -15,14 +15,14 @@ import os
     #os.system("steghide extract -sf me.jpg -p {}".format(mypass))
     
 def encryptactivate(dirdb, mypass):
-    os.system("ccrypt -e {} -K {}".format(dirdb, mypass))
+    os.system("yes | ccrypt -e {} -K {}".format(dirdb, mypass))
 
 def decryptactivate(dirdb, mypass):
-    os.system("ccrypt -d {} -K {}".format(dirdb, mypass))
+    os.system("yes | ccrypt -d {} -K {}".format(dirdb, mypass))
     
 
 def stegembedmydb():
-    os.system("ccrypt -d mydb.db -K 12345")
+    os.system("yes | ccrypt -d mydb.db -K 12345")
     os.system("steghide embed -ef mydb.db -cf mydb.jpeg -p 12345")
 
 #stegembedmydb()
@@ -30,6 +30,6 @@ def stegembedmydb():
 def stegextractmydb():
     #os.system("shred -zvu 1 mydb.db")
     os.system("yes | steghide extract -sf mydb.jpeg -p 12345")
-    os.system("ccrypt -e mydb.db -K 12345")
+    os.system("yes | ccrypt -e mydb.db -K 12345")
 
 #stegextractmydb()
