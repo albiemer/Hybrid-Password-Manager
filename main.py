@@ -1,4 +1,4 @@
-#!/usr/bin/env python3.9
+
 
 """
 
@@ -70,4 +70,3 @@ if __name__ == '__main__':
     window = webview.create_window("Hybrid Password Manager", 'http://127.0.0.1:4000/myconfirm', width=895, height=690, \
                                    resizable=False, fullscreen=False, frameless=False)
     webview.start(window)
-    exit()

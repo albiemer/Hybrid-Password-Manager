@@ -64,8 +64,8 @@ def hidedb():
 def sqlqueryaddnewrecord(*addnewq):
     conn = sqlite3.connect(addnewq[6])
     c = conn.cursor()
-    c.execute("insert into mypasstbl(Title, Username, Password, Authenticator, Url, Notes) values(?,?,?,?,?,?)", \
-              (addnewq[0], addnewq[1], addnewq[2], addnewq[3], addnewq[4], addnewq[5]))
+    c.execute("insert into mypasstbl(Title, Username, Password, Authenticator, Url, Notes, Imgdir) values(?,?,?,?,?,?,?)", \
+              (addnewq[0], addnewq[1], addnewq[2], addnewq[3], addnewq[4], addnewq[5], addnewq[7]))
     conn.commit()
     conn.close()
     
@@ -81,8 +81,8 @@ def sqlquerydeletepass(dirdb, idselected):
 def sqlqueryupdatepass(*updateq):
     conn = sqlite3.connect(updateq[7])
     c = conn.cursor()
-    c.execute("update mypasstbl set Title = ?, Username = ?, Password = ?, Authenticator = ?, Url = ?, Notes = ? where Id = ?", \
-              (updateq[1], updateq[2], updateq[3], updateq[4], updateq[5], updateq[6], updateq[0]))
+    c.execute("update mypasstbl set Title = ?, Username = ?, Password = ?, Authenticator = ?, Url = ?, Notes = ?, Imgdir = ? where Id = ?", \
+              (updateq[1], updateq[2], updateq[3], updateq[4], updateq[5], updateq[6], updateq[8], updateq[0]))
     conn.commit()
     conn.close()
 

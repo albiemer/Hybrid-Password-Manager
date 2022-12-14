@@ -1,7 +1,7 @@
 #import socket
 
 class myip:
-    ip = '192.168.1.2'
+    ip = '0.0.0.0'
     port = 5000
 
 def fullip():

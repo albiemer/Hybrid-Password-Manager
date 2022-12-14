@@ -39,6 +39,7 @@ def checkarg():
 @pwordapp.route('/updateproc', methods = ['POST'])
 def updatepassfunc():
     if request.method == 'POST':
+        img = request.form['i_mglink']
         myid = request.form['i_d']
         title = request.form['t_itle']
         uname = request.form['u_ser']
@@ -49,7 +50,7 @@ def updatepassfunc():
         if 'mypass' in session:
             mypass = session['mypass']
             decryptactivate(checkarg(), mypass)
-            sqlqueryupdatepass(myid, title, uname, pword, auth, url, notes, checkarg())
+            sqlqueryupdatepass(myid, title, uname, pword, auth, url, notes, checkarg(), img)
             return redirect(url_for('backtomainnonpostfunc'))
     return None
 
@@ -74,6 +75,7 @@ def addnewpword():
 @pwordapp.route('/addnewproc', methods = ['POST'])
 def addnewquery():
     if request.method == 'POST':
+        img = request.form['i_mglink']
         title = request.form['t_itle']
         uname = request.form['u_ser']
         pword = request.form['p_ass']
@@ -83,7 +85,7 @@ def addnewquery():
         if 'mypass' in session:
             mypass = session['mypass']
             decryptactivate(checkarg(), mypass)
-            sqlqueryaddnewrecord(title, uname, pword, auth, url, notes, checkarg())
+            sqlqueryaddnewrecord(title, uname, pword, auth, url, notes, checkarg(), img)
             allpass = selectallpass(checkarg())
             allpasscount = countpass(checkarg())
             encryptactivate(checkarg(), mypass)
