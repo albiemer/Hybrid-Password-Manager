@@ -62,6 +62,7 @@ The main program which is all password are listed.
 
 This is the password viewer and edit entry, this form are able to edit, delete, update record.
 
-![screen-2022-09-16-06-45-51](https://user-images.githubusercontent.com/36027987/190521692-2f01d282-3154-48bc-9122-52a908d46395.jpg)
+![screen-2022-12-15-05-19-44](https://user-images.githubusercontent.com/36027987/207717358-6af35a7a-8127-47c5-a322-c7e7574567b3.jpg)
+
 
 
