@@ -33,7 +33,7 @@ Create your own python3 environment
 
 
 STEP 5:
-Copy or move the "gi" folder into the "env" or environment folder library which that "gi" can find from the home directory of pository.
+Copy or move the "gi" folder into the "env" or environment folder library which that "gi" can find from the home directory of repository.
 
 ![screen-2022-12-15-18-54-19](https://user-images.githubusercontent.com/36027987/207842753-430af7cf-399d-4950-b288-f52ff5082df4.jpg)
 
