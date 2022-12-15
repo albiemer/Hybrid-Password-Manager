@@ -13,39 +13,48 @@ Install sqlite3 from your terminal
 
 ![screen-2022-09-02-02-39-19](https://user-images.githubusercontent.com/36027987/187988923-e4356239-aff7-42fe-9062-afe913f7f7d3.jpg)
 
-STEP2:
+
+STEP 2:
 Install ccrypt from your terminal
 
 ![screen-2022-09-02-02-43-19](https://user-images.githubusercontent.com/36027987/187989144-dac7c742-c153-4fd4-ac74-7f5e6afe1c9d.jpg)
+
 
 STEP 3:
 go to the directory where the package located
 
 ![screen-2022-09-02-02-53-12](https://user-images.githubusercontent.com/36027987/187990983-cebd8600-52a5-4bef-9912-1985a8487a22.jpg)
 
+
 STEP 4:
 Create your own python3 environment
 
 ![screen-2022-09-02-02-56-31](https://user-images.githubusercontent.com/36027987/187991610-c2a51716-f59f-4633-9480-a276cda28cfe.jpg)
 
+
 STEP 5:
+Copy or move the "gi" folder into the "env" or environment folder library which that "gi" can find from the home directory of repository.
+
+![screen-2022-12-15-18-54-19](https://user-images.githubusercontent.com/36027987/207842753-430af7cf-399d-4950-b288-f52ff5082df4.jpg)
+
+STEP 6:
 Install requirements into your python3 environments
 
 ![screen-2022-09-02-03-01-21](https://user-images.githubusercontent.com/36027987/187992289-a23c2a6b-cda9-438f-ac1a-7cbff2b0e692.jpg)
 
-STEP 6:
+STEP 7:
 type "python3 main.py -d pstardb.db" it depends on you if where the location of your database but atleast the directory is accurate for target in command.
 
 ![screen-2022-09-02-03-09-30](https://user-images.githubusercontent.com/36027987/187993561-cdb5f17d-704b-40bb-93bb-563fc0a2c957.jpg)
 
 USAGE:
 
-STEP 7:
+STEP 8:
 you have the option if you want the password manager accessible on your local network or you want to access it alone from your computer. if accessible this is the default url on the browser "192.168.1.2:5000/mypwdmngr" as long as you know your IP Address.
 
 ![screen-2022-09-02-03-11-55](https://user-images.githubusercontent.com/36027987/187993960-9bf8816e-d2b1-4564-a958-546b86bed9a1.jpg)
 
-STEP 8:
+STEP 9:
 Now you are at the login form the default user name is "gwen" and default password is "gw3n".
 
 ![screen-2022-09-02-03-12-45](https://user-images.githubusercontent.com/36027987/187994330-bef4612d-58bc-438d-8f78-563e27f6410f.jpg)
