@@ -103,6 +103,7 @@ def viewpword():
             decryptactivate(checkarg(), mypass)
             singlepass = sqlqueryidsearch(checkarg(), idsearch)
             encryptactivate(checkarg(), mypass)
+            session['prevsearch'] = singlepass[1]
         return render_template('pwordview.html', singlepass = singlepass)
     return None
 
@@ -111,11 +112,18 @@ def viewpword():
 def backtomainfunc():
     if 'mypass' in session:
         mypass = session['mypass']
+        if 'prevsearch' in session:
+            myprevsearch = session['prevsearch']
+            session.pop('prevsearch', None)
+        else:
+            myprevsearch = ""
+        
         decryptactivate(checkarg(), mypass)
         allpass = selectallpass(checkarg())
         allpasscount = countpass(checkarg())
         encryptactivate(checkarg(), mypass)
-    return render_template('main.html', allpass = allpass, allpasscount = allpasscount[0])
+    return render_template('main.html', allpass = allpass, allpasscount = allpasscount[0], \
+                           myprevsearch = myprevsearch)
 
 
 @pwordapp.route('/backtomainnonpost')
@@ -161,7 +169,7 @@ def exitloginfunc():
         #decryptactivate(session['mypass'])
         #stegembeddb(session['mypass'])
         encryptactivate(checkarg(), session['mypass'])
-        session.pop('mypass', None)
+        session.pop('mypass', None), session.clear()
         #window.destroy()
         return redirect(url_for('mypos'))
     else:
