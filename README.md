@@ -8,6 +8,12 @@ This is a Password manager that created primarily from Python3 with flask framew
 
 INSTRUCTION OF INSTALLATION AND USE AFTER YOU DOWNLOAD REPOS:
 
+Step 1:
+Install steghide from your terminal
+
+![screen01](https://user-images.githubusercontent.com/36027987/209571309-fd14a68f-4c4c-49b7-9f8d-0f207fb4c498.jpg)
+
+
 STEP 1:
 Install sqlite3 from your terminal
 
