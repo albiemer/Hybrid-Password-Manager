@@ -39,7 +39,6 @@ def checkarg():
 @pwordapp.route('/updateproc', methods = ['POST'])
 def updatepassfunc():
     if request.method == 'POST':
-        img = request.form['i_mglink']
         myid = request.form['i_d']
         title = request.form['t_itle']
         uname = request.form['u_ser']
@@ -50,7 +49,7 @@ def updatepassfunc():
         if 'mypass' in session:
             mypass = session['mypass']
             decryptactivate(checkarg(), mypass)
-            sqlqueryupdatepass(myid, title, uname, pword, auth, url, notes, checkarg(), img)
+            sqlqueryupdatepass(myid, title, uname, pword, auth, url, notes, checkarg())
             return redirect(url_for('backtomainnonpostfunc'))
     return None
 
@@ -75,7 +74,6 @@ def addnewpword():
 @pwordapp.route('/addnewproc', methods = ['POST'])
 def addnewquery():
     if request.method == 'POST':
-        img = request.form['i_mglink']
         title = request.form['t_itle']
         uname = request.form['u_ser']
         pword = request.form['p_ass']
@@ -85,7 +83,7 @@ def addnewquery():
         if 'mypass' in session:
             mypass = session['mypass']
             decryptactivate(checkarg(), mypass)
-            sqlqueryaddnewrecord(title, uname, pword, auth, url, notes, checkarg(), img)
+            sqlqueryaddnewrecord(title, uname, pword, auth, url, notes, checkarg())
             allpass = selectallpass(checkarg())
             allpasscount = countpass(checkarg())
             encryptactivate(checkarg(), mypass)
@@ -103,7 +101,6 @@ def viewpword():
             decryptactivate(checkarg(), mypass)
             singlepass = sqlqueryidsearch(checkarg(), idsearch)
             encryptactivate(checkarg(), mypass)
-            session['prevsearch'] = singlepass[1]
         return render_template('pwordview.html', singlepass = singlepass)
     return None
 
@@ -112,18 +109,11 @@ def viewpword():
 def backtomainfunc():
     if 'mypass' in session:
         mypass = session['mypass']
-        if 'prevsearch' in session:
-            myprevsearch = session['prevsearch']
-            session.pop('prevsearch', None)
-        else:
-            myprevsearch = ""
-        
         decryptactivate(checkarg(), mypass)
         allpass = selectallpass(checkarg())
         allpasscount = countpass(checkarg())
         encryptactivate(checkarg(), mypass)
-    return render_template('main.html', allpass = allpass, allpasscount = allpasscount[0], \
-                           myprevsearch = myprevsearch)
+    return render_template('main.html', allpass = allpass, allpasscount = allpasscount[0])
 
 
 @pwordapp.route('/backtomainnonpost')
@@ -138,7 +128,7 @@ def backtomainnonpostfunc():
          
 
 #4
-@pwordapp.route('/')
+@pwordapp.route('/mypwdmngr')
 def mypos():
     return render_template('Logintopos.html', myipaddress = fullip(), note = logintitle)
 
@@ -169,7 +159,7 @@ def exitloginfunc():
         #decryptactivate(session['mypass'])
         #stegembeddb(session['mypass'])
         encryptactivate(checkarg(), session['mypass'])
-        session.pop('mypass', None), session.clear()
+        session.pop('mypass', None)
         #window.destroy()
         return redirect(url_for('mypos'))
     else:
@@ -198,7 +188,7 @@ if __name__ == '__main__':
     stegextractmydb()
     runserver()
     # This line is to launch program in hybrid platform
-    window = webview.create_window("Hybrid Password Manager", 'http://'+fullip()+'/', width=895, height=690, \
+    window = webview.create_window("Hybrid Password Manager", 'http://'+fullip()+'/mypwdmngr', width=895, height=690, \
                                    resizable=False, fullscreen=False, frameless=False, confirm_close=False)
     webview.start(window)
     hidedb()
