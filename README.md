@@ -1,6 +1,6 @@
 # Hybrid-Password-Manager
 
-This program can only be use in Linux operating, this application can also be use in windows but need to be customize the command prompt from the script of python to be able use. i will post the windows application version sooner.
+This program can only be use in Linux operating and specifically in debian, this application can also be use in windows with docker or swl2. i will post the windows application version sooner.
 before to run the program be sure to install first the steghide with "sudo apt install steghide" and ccrypt with "sudo apt install apt ccrypt" from your terminal.
 please see the requirements for addtionall install library for this program to  make it fully functional.
 
