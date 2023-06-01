@@ -38,32 +38,28 @@ Create your own python3 environment
 ![screen-2022-09-02-02-56-31](https://user-images.githubusercontent.com/36027987/187991610-c2a51716-f59f-4633-9480-a276cda28cfe.jpg)
 
 STEP 6:
-
-Install Flask library from your python environment just type this "pip3 install flask"
-
-STEP 7:
 Copy the "gi" folder into the "env" or environment folder library which that "gi" can find from the library directory of python installed from the system or if you are not going to use virtual environment its fine to use directly the "gi library from system and nothing todo as long as you installed also from the system the other required library from requirements.txt" to make this program fully function.
 
 ![screen-2022-12-15-18-54-19](https://user-images.githubusercontent.com/36027987/207842753-430af7cf-399d-4950-b288-f52ff5082df4.jpg)
 
-STEP 8:
+STEP 7:
 Install requirements into your python3 environments
 
 ![screen-2022-09-02-03-01-21](https://user-images.githubusercontent.com/36027987/187992289-a23c2a6b-cda9-438f-ac1a-7cbff2b0e692.jpg)
 
-STEP 9:
+STEP 8:
 type "python3 main.py -d pstardb.db" it depends on you if where the location of your database but atleast the directory is accurate for target in command.
 
 ![screen-2022-09-02-03-09-30](https://user-images.githubusercontent.com/36027987/187993561-cdb5f17d-704b-40bb-93bb-563fc0a2c957.jpg)
 
 USAGE:
 
-STEP 10:
+STEP 9:
 you have the option if you want the password manager accessible on your local network or you want to access it alone from your computer. if accessible this is the default url on the browser "192.168.1.2:5000/mypwdmngr" as long as you know your IP Address.
 
 ![screen-2022-09-02-03-11-55](https://user-images.githubusercontent.com/36027987/187993960-9bf8816e-d2b1-4564-a958-546b86bed9a1.jpg)
 
-STEP 11:
+STEP 10:
 Now you are at the login form the default user name is "gwen" and default password is "gw3n".
 
 ![screen-2022-09-02-03-12-45](https://user-images.githubusercontent.com/36027987/187994330-bef4612d-58bc-438d-8f78-563e27f6410f.jpg)
